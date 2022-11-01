@@ -10,27 +10,19 @@ List<Todo> todoList = [];
 late int lastIndex;
 
 getStorage() {
-  print('\n Getting Local storage...');
-
   arrTodos = window.localStorage['todos'];
-  print(arrTodos);
   if(arrTodos == "" || (arrTodos == null)){
     window.localStorage['todos'] = todoList.toString();
     arrTodos = window.localStorage['todos'];
 
   }
   print("getStorage called");
-  print(arrTodos);
 
   final todos = jsonDecode(arrTodos);
-
-
   print(todos);
-
   todos.forEach((element) {
     Todo singleTodo = Todo.fromJson(element);
     todoList.add(singleTodo);
-    print(singleTodo.id);
   });
 
   if(todoList.isEmpty || todoList == null){
@@ -39,8 +31,6 @@ getStorage() {
   else{
     lastIndex = todoList.elementAt(todoList.length-1).id!;
   }
-  print(lastIndex);
-
   updateTodos();
  print('Finished Getting Local storage...');
  return todoList;

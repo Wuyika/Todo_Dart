@@ -4,14 +4,14 @@ import 'models/todo.dart';
 import 'repository/storage.dart';
 
 
-late Storage storage;
+
 late InputElement todoInput;
 late InputElement dateInput;
 late DivElement uiList;
 late ButtonElement buttonClear;
 late ButtonElement buttonAdd;
 
-void main()  async{
+void main() async {
   todoInput = querySelector('#todo') as InputElement;
   dateInput = querySelector('#date') as InputElement;
 
@@ -21,15 +21,8 @@ void main()  async{
 
   buttonAdd.onClick.listen(addTodo);
   buttonClear.onClick.listen(removeAllTodos);
-  // storage = window.localStorage;
-  // print(storage.values);
 
   await getStorage();
-  // updateTodos();
-
-  // print("after");
-  // print(todos);
-
 
 }
 
@@ -41,8 +34,6 @@ void addTodo(Event event) {
     return;
   }
   todoList.add(todo);
-  // displayTodo(todoList, ' finished adding todo task');
-
   updateTodos();
   todoInput.value = '';
   dateInput.value = '';
@@ -53,7 +44,6 @@ void addTodo(Event event) {
 void updateTodos() {
 
   uiList.children.clear();
-
   todoList.forEach((todo) {
     DivElement div = DivElement();
     ButtonElement buttonRemove = ButtonElement();
@@ -92,5 +82,4 @@ void removeAllTodos(MouseEvent event) {
   window.localStorage.clear();
   uiList.children.clear();
   todoList.clear();
-
 }
