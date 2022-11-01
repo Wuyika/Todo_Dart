@@ -1,0 +1,18 @@
+[
+  {
+    "name":"Ash",
+    "age":"22",
+    "hobby" : "golf"
+  },
+  {
+    "name":"philip",
+    "age":"17",
+    "hobby" : "fishing"
+  },
+  {
+    "name":"charles",
+    "age":"32",
+    "hobby" : "drawing"
+  }
+
+]

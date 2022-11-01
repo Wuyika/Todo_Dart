@@ -1,46 +1,80 @@
-import 'dart:html';
+import 'dart:convert';
+import 'dart:html' hide File;
+// import 'dart:io';
+import 'components/div.dart';
 import 'todo.dart';
-
-
+import 'storage.dart';
+late Storage storage;
 late InputElement todoInput;
+late InputElement dateInput;
 late DivElement uiList;
 late ButtonElement buttonClear;
+late ButtonElement buttonAdd;
 
-const List<Todo> todoList = [];
 
-void main() {
+
+
+void main()  async{
   todoInput = querySelector('#todo') as InputElement;
+  dateInput = querySelector('#date') as InputElement;
+
   uiList = querySelector('#todo-list') as DivElement;
   buttonClear = querySelector('#clear') as ButtonElement;
+  buttonAdd = querySelector('#add') as ButtonElement;
 
-  todoInput.onChange.listen(addTodo);
+  buttonAdd.onClick.listen(addTodo);
   buttonClear.onClick.listen(removeAllTodos);
+  // storage = window.localStorage;
+  // print(storage.values);
+
+  await getStorage();
+  // updateTodos();
+
+  // print("after");
+  // print(todos);
+
+
 }
 
 void addTodo(Event event) {
-  Todo todo = Todo(todoInput.value);
+  print('\n adding todo task');
+
+  Todo todo = Todo(todoInput.value, dateInput.value);
+  if (todoInput.value == "" || dateInput.value == "") {
+    return;
+  }
   todoList.add(todo);
+  // displayTodo(todoList, ' finished adding todo task');
 
   updateTodos();
   todoInput.value = '';
+  dateInput.value = '';
+  addStorage(todoList);
+
+
 }
 
 void updateTodos() {
+
   uiList.children.clear();
 
   todoList.forEach((todo) {
     DivElement div = DivElement();
     ButtonElement buttonRemove = ButtonElement();
-    Element span = Element.span();
 
+    final checkbox = buildCheckBox();
+    final text = buildText(todo.text!);
+    final date = buildDeleteEdit(todo.id.toString(), todo.dateTime!);
+
+    final ul = buildUl(checkbox, text, date);
     buttonRemove.text = 'X';
     buttonRemove.id = todo.id.toString();
     buttonRemove.onClick.listen(removeTodo);
 
-    span.text = todo.text;
+    div.children.add(ul);
+    // div.children.add(buttonRemove);
 
-    div.children.add(buttonRemove);
-    div.children.add(span);
+    div.className = "";
     uiList.children.add(div);
   });
 }
@@ -57,8 +91,10 @@ void removeTodo(MouseEvent event) {
   div?.remove();
 }
 
+
 void removeAllTodos(MouseEvent event) {
+  window.localStorage.clear();
   uiList.children.clear();
   todoList.clear();
-}
 
+}
