@@ -1,18 +1,15 @@
-import 'dart:convert';
 import 'dart:html' hide File;
-// import 'dart:io';
 import 'components/div.dart';
-import 'todo.dart';
-import 'storage.dart';
+import 'models/todo.dart';
+import 'repository/storage.dart';
+
+
 late Storage storage;
 late InputElement todoInput;
 late InputElement dateInput;
 late DivElement uiList;
 late ButtonElement buttonClear;
 late ButtonElement buttonAdd;
-
-
-
 
 void main()  async{
   todoInput = querySelector('#todo') as InputElement;
@@ -50,7 +47,6 @@ void addTodo(Event event) {
   todoInput.value = '';
   dateInput.value = '';
   addStorage(todoList);
-
 
 }
 

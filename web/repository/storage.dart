@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:html';
-import 'todo.dart';
-import 'main.dart';
+import '../models/todo.dart';
+import '../main.dart';
 
 // late Storage storage;
 late dynamic arrTodos;

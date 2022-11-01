@@ -1,4 +1,4 @@
-import 'storage.dart';
+import '../repository/storage.dart';
 
 class Todo {
   static int _id = ++lastIndex;
