@@ -1,9 +1,8 @@
+import 'dart:convert';
 import 'dart:html' hide File;
 import 'components/div.dart';
 import 'models/todo.dart';
 import 'repository/storage.dart';
-
-
 
 late InputElement todoInput;
 late InputElement dateInput;
@@ -23,7 +22,6 @@ void main() async {
   buttonClear.onClick.listen(removeAllTodos);
 
   await getStorage();
-
 }
 
 void addTodo(Event event) {
@@ -38,45 +36,38 @@ void addTodo(Event event) {
   todoInput.value = '';
   dateInput.value = '';
   addStorage(todoList);
-
 }
 
 void updateTodos() {
+  final spin = loadingSpinner();
 
   uiList.children.clear();
+
   todoList.forEach((todo) {
     DivElement div = DivElement();
-    ButtonElement buttonRemove = ButtonElement();
 
     final checkbox = buildCheckBox();
     final text = buildText(todo.text!);
     final date = buildDeleteEdit(todo.id.toString(), todo.dateTime!);
 
     final ul = buildUl(checkbox, text, date);
-    buttonRemove.text = 'X';
-    buttonRemove.id = todo.id.toString();
-    buttonRemove.onClick.listen(removeTodo);
 
     div.children.add(ul);
-    // div.children.add(buttonRemove);
-
     div.className = "";
     uiList.children.add(div);
   });
+
 }
 
 void removeTodo(MouseEvent event) {
-  event.stopPropagation();
-
-  Element? div = (event.currentTarget as Element).parent;
+  print('Todolist');
   Element button = (event.currentTarget as Element);
-
   int key = int.parse(button.id.split('-')[0]);
   todoList.removeWhere((todo) => todo.id == key);
-
-  div?.remove();
+  print("after removing");
+  addStorage(todoList);
+  updateTodos();
 }
-
 
 void removeAllTodos(MouseEvent event) {
   window.localStorage.clear();

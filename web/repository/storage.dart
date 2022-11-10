@@ -7,6 +7,7 @@ import '../main.dart';
 late dynamic arrTodos;
 late InputElement todoInput;
 List<Todo> todoList = [];
+List<Todo> subTodoList = [];
 late int lastIndex;
 
 getStorage() {
@@ -16,6 +17,7 @@ getStorage() {
     arrTodos = window.localStorage['todos'];
 
   }
+
   print("getStorage called");
 
   final todos = jsonDecode(arrTodos);
@@ -24,6 +26,8 @@ getStorage() {
     Todo singleTodo = Todo.fromJson(element);
     todoList.add(singleTodo);
   });
+
+
 
   if(todoList.isEmpty || todoList == null){
     lastIndex = 0;

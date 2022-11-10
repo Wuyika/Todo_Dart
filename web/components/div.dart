@@ -1,5 +1,17 @@
 import 'dart:html';
 
+import '../main.dart';
+
+loadingSpinner(){
+  DivElement spinner = DivElement();
+  Element span = Element.span();
+  span.className = "visually-hidden";
+  span.text = "visually hidden...";
+  spinner.className = "spinner-border";
+  spinner.children.add(span);
+  return spinner;
+}
+
 buildCheckBox() {
   Element li = Element.li();
   DivElement div = DivElement();
@@ -32,23 +44,28 @@ buildText(String text) {
 
 buildDeleteEdit(String id, String date) {
   Element pEdit = Element.p();
-  Element aEdit = Element.a();
+  ButtonElement buttonEdit = ButtonElement();
   Element pDelete = Element.p();
-  Element aDelete = Element.a();
+  ButtonElement buttonDelete = ButtonElement();
   DivElement div_1 = DivElement();
 
   // create edit element
-  pEdit.className = "fas fa-pencil-alt me-3 text-info";
-  aEdit.children.add(pEdit);
+  pEdit.className = "fas fa-pencil-alt text-info";
+  buttonEdit.className = "border-0";
+  buttonEdit.children.add(pEdit);
   // create delete element
   pDelete.className = "fas fa-trash-alt text-danger";
-  aDelete.id = id;
+  buttonDelete.id = id;
+  buttonDelete.type = "button";
+  buttonDelete.className = "ms-2 border-0";
   // aDelete.onClick.listen();
-  aDelete.children.add(pDelete);
+  buttonDelete.children.add(pDelete);
+  buttonDelete.onClick.listen(removeTodo);
+
 
   div_1.className = "d-flex flex-row justify-content-end mb-1";
-  div_1.children.add(aEdit);
-  div_1.children.add(aDelete);
+  div_1.children.add(buttonEdit);
+  div_1.children.add(buttonDelete);
 
   // build text and icon
   Element p1 = Element.p();
