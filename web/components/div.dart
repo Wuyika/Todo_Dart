@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:html';
 import '../main.dart';
 import '../models/subtodo.dart';
@@ -8,6 +7,7 @@ import '../todo_actions/sub_todo_actions.dart';
 import '../todo_actions/todo_actions.dart';
 
 // late HtmlElement ell = ;
+
 
 addSubButton() {
   ButtonElement addSub = ButtonElement();
@@ -174,14 +174,18 @@ subTask(int? id) {
   print(inputElement.id);
   print(dateElement.id);
 
+
+
   ul_1.className = "ms-4 ps-5 d-grid gap-2 ";
   ul_1.children.add(divElement);
 
-  print("checking");
+  subTodoList.forEach((todo) {
+    Element li = Element.li();
+    li.className = "p-2 bg-light border";
+    li.text = todo.text;
+    ul_1.children.add(li);
+  });
 
-  print(jsonEncode(subTodoList));
-
-  // print(subTodoList.where((todo) => todo.foreignKey == id).toList());
 
   return ul_1;
 }
