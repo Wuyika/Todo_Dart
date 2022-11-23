@@ -9,8 +9,9 @@
       <change beforePath="$PROJECT_DIR$/web/components/div.dart" beforeDir="false" afterPath="$PROJECT_DIR$/web/components/div.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/web/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/models/subtodo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/web/models/subtodo.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/models/todo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/web/models/todo.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/repository/storage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/web/repository/storage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/repository/storage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/web/repository/todo_storage.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

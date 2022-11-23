@@ -2,32 +2,30 @@ import 'dart:convert';
 import 'dart:html';
 import '../models/todo.dart';
 import '../main.dart';
+import '../todo_actions/todo_actions.dart';
 
 // late Storage storage;
 late dynamic arrTodos;
-late InputElement todoInput;
+late dynamic arrSubTodos;
 List<Todo> todoList = [];
-List<Todo> subTodoList = [];
 late int lastIndex;
 
-getStorage() {
+getTodoStorage() {
   arrTodos = window.localStorage['todos'];
+  arrSubTodos = window.localStorage['subtodos'];
   if(arrTodos == "" || (arrTodos == null)){
     window.localStorage['todos'] = todoList.toString();
     arrTodos = window.localStorage['todos'];
-
   }
 
-  print("getStorage called");
+  // print("getStorage called");
 
   final todos = jsonDecode(arrTodos);
-  print(todos);
+  // print(todos);
   todos.forEach((element) {
     Todo singleTodo = Todo.fromJson(element);
     todoList.add(singleTodo);
   });
-
-
 
   if(todoList.isEmpty || todoList == null){
     lastIndex = 0;
@@ -35,8 +33,7 @@ getStorage() {
   else{
     lastIndex = todoList.elementAt(todoList.length-1).id!;
   }
-  updateTodos();
- print('Finished Getting Local storage...');
+  // updateTodos();
  return todoList;
 }
 
@@ -49,7 +46,7 @@ getStorage() {
 //   print(header);
 // }
 
-addStorage(List todolist){
+addTodoStorage(List todolist){
   print('\n adding to local storage');
   window.localStorage["todos"] = jsonEncode(todolist);
   final done = window.localStorage['todos'];

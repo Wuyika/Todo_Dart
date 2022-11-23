@@ -1,11 +1,10 @@
-import '../repository/storage.dart';
+import '../repository/todo_storage.dart';
 
 class Todo {
   static int _id = ++lastIndex;
   int? id; //fix ID incrementation.
   final String? text;
   String? dateTime;
-
 
   Todo(this.text, this.dateTime) : id = _id++;
 
